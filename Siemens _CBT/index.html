@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siemens Technical Academy | CBT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-container">
+        <div class="logo-header">
+            <span class="siemens-text">SIEMENS</span>
+        </div>
+
+        <div id="login-section" class="login-card">
+            <h2 style="text-align: left; margin-bottom: 20px;">Student Login</h2>
+            <div class="input-group">
+                <label>Student Name</label>
+                <input type="text" id="studentName" placeholder="Enter Name">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="studentPass" placeholder="Enter Password">
+                <p id="login-error">❌ Name or Password is not correct.</p>
+            </div>
+            <button class="login-btn" style="width: 100px;" onclick="showInstructions()">LOG IN</button>
+        </div>
+
+        <div id="instruction-section" class="login-card" style="display: none; text-align: left;">
+            <h2 style="text-align: center;">Exam Instructions</h2>
+            <hr style="margin: 15px 0; border: 0.5px solid #eee;">
+            <ul style="list-style: none; line-height: 2; color: #444;">
+                <li>✅ <b>Duration:</b> 30 Minutes</li>
+                <li>✅ <b>Security:</b> Leaving this tab will trigger a warning.</li>
+                <li>⚠️ <b>Limit:</b> 2nd violation will auto-submit the exam.</li>
+            </ul>
+            <br>
+            <button class="login-btn" style="width: 100%;" onclick="startExam()">START EXAM</button>
+        </div>
+
+        <div id="question-section" class="login-card" style="display: none; max-width: 700px; text-align: left; position: relative; min-height: 520px; padding-bottom: 80px;">
+            <div style="display: flex; justify-content: space-between; font-weight: bold; color: #00828c; margin-bottom: 10px;">
+                <span>Question <span id="question-number">1</span> / 20</span>
+                <span id="timer-display" style="color: #d9534f;">Time: 30:00</span>
+            </div>
+            <div class="progress-container"><div id="progress-bar"></div></div>
+            <h3 id="question-text" style="margin-bottom: 20px; color: #333; min-height: 60px; line-height: 1.4;"></h3>
+            <div id="options-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            
+            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between;">
+                <button id="prev-btn" class="login-btn" style="width: 120px; background: #6c757d;" onclick="prevQuestion()">PREVIOUS</button>
+                <button id="next-btn" class="login-btn" style="width: 120px;" onclick="nextQuestion()">NEXT</button>
+            </div>
+        </div>
+
+        <div id="result-section" class="login-card" style="display: none; text-align: center;">
+            <h2 id="result-status" style="font-size: 28px;">STATUS</h2>
+            <div style="font-size: 50px; font-weight: bold; margin: 20px 0;"><span id="final-score">0</span>/20</div>
+            <p id="result-percent" style="margin-bottom: 20px; font-size: 18px;">Percentage: 0%</p>
+            <p style="color: #888; font-style: italic; border-top: 1px solid #eee; padding-top: 15px;">Exam session has ended. Contact your supervisor.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
