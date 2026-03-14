@@ -22,7 +22,7 @@
             <div class="input-group">
                 <label>Password</label>
                 <input type="password" id="studentPass" placeholder="Enter Password">
-                <p id="login-error">❌ Name or Password is not correct.</p>
+                <p id="login-error" style="color: #d9534f; font-size: 13px; margin-top: 5px; display: none; font-weight: 600;">❌ Name or Password is not correct.</p>
             </div>
             <button class="login-btn" style="width: 100px;" onclick="showInstructions()">LOG IN</button>
         </div>
@@ -32,8 +32,8 @@
             <hr style="margin: 15px 0; border: 0.5px solid #eee;">
             <ul style="list-style: none; line-height: 2; color: #444;">
                 <li>✅ <b>Duration:</b> 30 Minutes</li>
-                <li>✅ <b>Security:</b> Leaving this tab will trigger a warning.</li>
-                <li>⚠️ <b>Limit:</b> 2nd violation will auto-submit the exam.</li>
+                <li>✅ <b>Security:</b> Fullscreen mode is mandatory.</li>
+                <li>⚠️ <b>Warning:</b> Leaving the tab twice will auto-submit.</li>
             </ul>
             <br>
             <button class="login-btn" style="width: 100%;" onclick="startExam()">START EXAM</button>
@@ -58,7 +58,7 @@
             <h2 id="result-status" style="font-size: 28px;">STATUS</h2>
             <div style="font-size: 50px; font-weight: bold; margin: 20px 0;"><span id="final-score">0</span>/20</div>
             <p id="result-percent" style="margin-bottom: 20px; font-size: 18px;">Percentage: 0%</p>
-            <p style="color: #888; font-style: italic; border-top: 1px solid #eee; padding-top: 15px;">Exam session has ended. Contact your supervisor.</p>
+            <p style="color: #888; font-style: italic; border-top: 1px solid #eee; padding-top: 15px;">Exam ended. Please contact your supervisor.</p>
         </div>
     </div>
 
