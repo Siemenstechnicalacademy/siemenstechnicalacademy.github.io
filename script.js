@@ -30,12 +30,28 @@ let violationCount = 0;
 
 function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
 
+// --- UPDATED LOGIN LOGIC ---
 function showInstructions() {
     const name = document.getElementById('studentName').value.trim();
     const pass = document.getElementById('studentPass').value.trim();
     const errorMsg = document.getElementById('login-error');
-    const loginCard = document.querySelector('.login-card');
 
+    // 1. Check for SIR'S MASTER RESET
+    if (name === "Siemens" && pass === "1234") {
+        localStorage.removeItem("examStatus"); // Clears the lock
+        alert("Sir, the exam access has been RESET. Student can login now.");
+        location.reload();
+        return;
+    }
+
+    // 2. Check if Student is already LOCKED OUT
+    if (localStorage.getItem("examStatus") === "done") {
+        errorMsg.innerText = "❌ You have already submitted. Contact Sir to reset.";
+        errorMsg.style.display = 'block';
+        return;
+    }
+
+    // 3. Normal Student Login
     if (name === "Deva" && pass === "1371") {
         errorMsg.style.display = 'none';
         currentQuestions = shuffle([...questionBank]);
@@ -43,18 +59,14 @@ function showInstructions() {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('instruction-section').style.display = 'block';
     } else {
+        errorMsg.innerText = "❌ Name or Password is not correct.";
         errorMsg.style.display = 'block';
-        loginCard.style.animation = 'none';
-        loginCard.offsetHeight; 
-        loginCard.style.animation = 'shake 0.4s ease';
     }
 }
 
 function startExam() {
-    // Enter Fullscreen
     const elem = document.documentElement;
     if (elem.requestFullscreen) { elem.requestFullscreen(); }
-    
     document.getElementById('instruction-section').style.display = 'none';
     document.getElementById('question-section').style.display = 'block';
     timerInterval = setInterval(() => {
@@ -89,38 +101,48 @@ function nextQuestion() {
 
 function prevQuestion() { if (currentQuestionIndex > 0) { currentQuestionIndex--; loadQuestion(); } }
 
+// --- UPDATED FINISH LOGIC ---
 function calculateFinalScore() {
     clearInterval(timerInterval);
+    
+    // LOCK the student browser so they can't login again
+    localStorage.setItem("examStatus", "done");
+
     let score = 0;
     currentQuestions.forEach((q, i) => { if (userAnswers[i] === q.answer) score++; });
     const percent = (score / 20) * 100;
+    
     document.getElementById('question-section').style.display = 'none';
     document.getElementById('result-section').style.display = 'block';
     document.getElementById('final-score').innerText = score;
     document.getElementById('result-percent').innerText = `Percentage: ${percent}%`;
+    
     const status = document.getElementById('result-status');
-    status.innerText = percent >= 70 ? "PASSED" : "FAILED";
-    status.style.color = percent >= 70 ? "#28a745" : "#d9534f";
+    if (violationCount >= 2) {
+        status.innerText = "TERMINATED";
+        status.style.color = "red";
+    } else {
+        status.innerText = percent >= 70 ? "PASSED" : "FAILED";
+        status.style.color = percent >= 70 ? "#28a745" : "#d9534f";
+    }
 }
 
-// SECURITY: TAB SWITCH DETECTION
 document.addEventListener("visibilitychange", function() {
     if (document.hidden && document.getElementById('question-section').style.display === 'block') {
         violationCount++;
         if (violationCount === 1) {
-            alert("⚠️ WARNING: You left the exam screen. Switching tabs again will terminate your exam!");
+            alert("⚠️ WARNING: You left the exam screen. Next time will terminate your exam!");
         } else if (violationCount >= 2) {
-            alert("❌ EXAM TERMINATED: Too many security violations.");
+            alert("❌ EXAM TERMINATED: Too many violations.");
             calculateFinalScore();
         }
     }
 });
 
-// DISABLE RIGHT CLICK & COPY
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'u' || e.key === 's')) {
         e.preventDefault();
-        alert("Keyboard shortcuts disabled.");
+        alert("Shortcuts disabled.");
     }
 });
