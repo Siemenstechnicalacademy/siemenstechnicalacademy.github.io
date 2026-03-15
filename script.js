@@ -46,7 +46,7 @@ function showInstructions() {
 
     // 2. Check if Student is already LOCKED OUT
     if (localStorage.getItem("examStatus") === "done") {
-        errorMsg.innerText = "❌ You have already submitted. Contact Sir to reset.";
+        errorMsg.innerText = "❌ You have already submitted. Contact your admin to reset.";
         errorMsg.style.display = 'block';
         return;
     }
