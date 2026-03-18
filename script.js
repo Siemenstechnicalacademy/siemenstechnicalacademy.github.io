@@ -1,104 +1,109 @@
-// --- STUDENT DATABASE ---
-const students = [
-    { name: "Deva", pass: "1371" },
-    { name: "Hitesh", pass: "2685" },
-    { name: "Saurabh", pass: "3252" },
-    { name: "Soham", pass: "3261" },
-    { name: "Shreya", pass: "3263" }
-];
-
 let currentQuestions = [];
 let currentQuestionIndex = 0;
-let userAnswers = []; 
+let userAnswers = [];
 let timeLeft = 1800; 
 let timerInterval;
+let warningCount = 0; // Tracks tab switching
 
-// 1. LOGIN FUNCTION
 function showInstructions() {
-    const enteredNameRaw = document.getElementById('studentName').value.trim();
+    const enteredName = document.getElementById('studentName').value.trim().toLowerCase();
     const enteredPass = document.getElementById('studentPass').value.trim();
     const errorMsg = document.getElementById('login-error');
 
-    console.log("Attempting login for:", enteredNameRaw, enteredPass);
-
-    const student = students.find(s => 
-        s.name.toLowerCase() === enteredNameRaw.toLowerCase() && s.pass === enteredPass
-    );
+    const student = students.find(s => s.name.toLowerCase() === enteredName && s.pass === enteredPass);
 
     if (student) {
-        console.log("Login Success!");
         loadSelectedQuestions();
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('instruction-section').style.display = 'block';
     } else {
-        console.error("Login Failed. Check if name/pass matches the list at the top of script.js");
-        errorMsg.innerText = "❌ Invalid Name or TC Number.";
         errorMsg.style.display = 'block';
     }
 }
 
-// 2. LOAD QUESTIONS FROM LINK
+// SECURITY MONITOR: Detects if user leaves the tab
+document.addEventListener("visibilitychange", function() {
+    // Only monitor if the exam has actually started
+    if (document.getElementById('question-section').style.display === 'block') {
+        if (document.hidden) {
+            warningCount++;
+            
+            if (warningCount === 1) {
+                alert("⚠️ WARNING 1: Do not leave this page! Your exam will be submitted if you switch tabs again.");
+            } else if (warningCount === 2) {
+                alert("⚠️ FINAL WARNING: One more violation and your exam will end immediately.");
+            } else if (warningCount >= 3) {
+                alert("❌ EXAM TERMINATED: Multiple security violations detected. Your score is being submitted.");
+                finishExam(); // Auto-submits the exam
+            }
+        }
+    }
+});
+
 function loadSelectedQuestions() {
     const urlParams = new URLSearchParams(window.location.search);
     const selectedIds = urlParams.get('ids');
-    
-    let allQuestionsList = [];
-    // masterQuestionBank comes from questions.js
-    if (typeof masterQuestionBank !== 'undefined') {
-        for (let topic in masterQuestionBank) {
-            allQuestionsList = allQuestionsList.concat(masterQuestionBank[topic]);
-        }
+    let allQuestions = [];
+
+    for (let topic in masterQuestionBank) {
+        allQuestions = allQuestions.concat(masterQuestionBank[topic]);
     }
 
     if (selectedIds) {
         const idArray = selectedIds.split(',');
-        currentQuestions = allQuestionsList.filter(q => idArray.includes(q.id));
+        currentQuestions = allQuestions.filter(q => idArray.includes(q.id));
     } else {
-        // Default to 20 random if no link is used
-        currentQuestions = allQuestionsList.sort(() => 0.5 - Math.random()).slice(0, 20);
+        currentQuestions = allQuestions.slice(0, 10);
     }
-    
     userAnswers = new Array(currentQuestions.length).fill(null);
 }
 
-// 3. START EXAM
 function startExam() {
     document.getElementById('instruction-section').style.display = 'none';
     document.getElementById('question-section').style.display = 'block';
-    
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        let min = Math.floor(timeLeft / 60);
-        let sec = timeLeft % 60;
-        document.getElementById('timer-display').innerText = `Time: ${min}:${sec < 10 ? '0'+sec : sec}`;
-        if (timeLeft <= 0) calculateFinalScore();
-    }, 1000);
-    
+    startTimer();
     loadQuestion();
 }
 
+function startTimer() {
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        document.getElementById('timer-display').innerText = `Time: ${m}:${secFormat(s)}`;
+        if (timeLeft <= 0) finishExam();
+    }, 1000);
+}
+
+function secFormat(s) { return s < 10 ? '0'+s : s; }
+
 function loadQuestion() {
     const q = currentQuestions[currentQuestionIndex];
+    document.getElementById('question-number').innerText = (currentQuestionIndex + 1);
     document.getElementById('question-text').innerText = q.q;
-    document.getElementById('question-number').innerText = currentQuestionIndex + 1;
     
     const container = document.getElementById('options-container');
-    container.innerHTML = ""; 
+    container.innerHTML = "";
     q.options.forEach(opt => {
-        const checked = userAnswers[currentQuestionIndex] === opt ? "checked" : "";
-        container.innerHTML += `<label class="option-label"><input type="radio" name="opt" value="${opt}" ${checked} onchange="userAnswers[${currentQuestionIndex}]='${opt}'"> ${opt}</label>`;
+        const isChecked = userAnswers[currentQuestionIndex] === opt ? "checked" : "";
+        container.innerHTML += `
+            <label class="option-label">
+                <input type="radio" name="answer" value="${opt}" ${isChecked} onchange="saveAnswer('${opt}')"> ${opt}
+            </label>`;
     });
 
     document.getElementById('prev-btn').style.visibility = currentQuestionIndex === 0 ? "hidden" : "visible";
     document.getElementById('next-btn').innerText = currentQuestionIndex === currentQuestions.length - 1 ? "FINISH" : "NEXT";
 }
 
+function saveAnswer(val) { userAnswers[currentQuestionIndex] = val; }
+
 function nextQuestion() {
     if (currentQuestionIndex < currentQuestions.length - 1) {
         currentQuestionIndex++;
         loadQuestion();
     } else {
-        if(confirm("Submit Exam?")) calculateFinalScore();
+        if(confirm("Are you sure you want to finish?")) finishExam();
     }
 }
 
@@ -109,14 +114,14 @@ function prevQuestion() {
     }
 }
 
-function calculateFinalScore() {
+function finishExam() {
     clearInterval(timerInterval);
     let score = 0;
     currentQuestions.forEach((q, i) => { if (userAnswers[i] === q.answer) score++; });
     
-    const percent = Math.round((score / currentQuestions.length) * 100);
     document.getElementById('question-section').style.display = 'none';
     document.getElementById('result-section').style.display = 'block';
     document.getElementById('final-score').innerText = score;
-    document.getElementById('result-percent').innerText = `Percentage: ${percent}%`;
+    document.getElementById('total-q').innerText = currentQuestions.length;
+    document.getElementById('result-percent').innerText = `Percentage: ${Math.round((score/currentQuestions.length)*100)}%`;
 }
