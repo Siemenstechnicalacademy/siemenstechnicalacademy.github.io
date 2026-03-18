@@ -2,147 +2,83 @@
 const students = [
     { name: "Deva", pass: "1371" },
     { name: "Hitesh", pass: "2685" },
-    { name: "Saurabh Shivaji Bhoir", pass: "3252" },
-    { name: "Soham Mahendra Chaudhari", pass: "3261" },
-    { name: "Shreya Sharad Dabhade", pass: "3263" },
-    { name: "Ruchita Pandurang Farde", pass: "3271" },
-    { name: "Mithil Jitendra Gawde", pass: "3274" },
-    { name: "Swapnil Jotiram Jambhale", pass: "3281" },
-    { name: "Sankit Shivprasad Kahar", pass: "3284" },
-    { name: "Adil Dawood Khan", pass: "3288" },
-    { name: "Nayan Shrikant Kondilkar", pass: "3291" },
-    { name: "Parth Gajanan Kondilkar", pass: "3292" },
-    { name: "Yash Ankush Kumawat", pass: "3294" },
-    { name: "Manas Sunil Lad", pass: "3296" },
-    { name: "Sujit Dinesh Magar", pass: "3299" },
-    { name: "Kunal Pundalik Mahajan", pass: "3301" },
-    { name: "Viraj Dhanaji Malik", pass: "3302" },
-    { name: "Tejas Ganpat Padwal", pass: "3311" },
-    { name: "Yadnyesh Prakash Partole", pass: "3313" },
-    { name: "Harsh Ganesh Patil", pass: "3314" },
-    { name: "Jitesh Ganesh Rane", pass: "3320" },
-    { name: "Dimpal Subhash Rasal", pass: "3321" },
-    { name: "Kasturi Kiran Shingate", pass: "3329" },
-    { name: "Daksh Prabhakar Sonawane", pass: "3330" },
-    { name: "Payal Tatya Suryavanshi", pass: "3334" },
-    { name: "Samadhan Sitaram Suryavanshi", pass: "3335" },
-    { name: "Pramita Gautam Vavhal", pass: "3340" },
-    { name: "Bhushan Gurunath Vishe", pass: "3341" },
-    { name: "Om Dinesh Vishe", pass: "3342" },
-    { name: "Shriraj Nitin Wadkar", pass: "3344" },
-    { name: "Ragini Shivnath Jaiswar", pass: "3355" },
-    { name: "Sarthak Dattatray", pass: "3246" },
-    { name: "Paras Bhagwan", pass: "3251" },
-    { name: "Aryan Sameer", pass: "3257" },
-    { name: "Nayan Ashok", pass: "3258" },
-    { name: "Sayali Mahadev", pass: "3276" },
-    { name: "Palak Raghav", pass: "3278" },
-    { name: "Renuka Kailas", pass: "3283" },
-    { name: "Nikhil Pradip", pass: "3285" },
-    { name: "Ved Arun Kawale", pass: "3286" },
-    { name: "Shivani Sharad", pass: "3287" },
-    { name: "Nishant Bharat", pass: "3289" },
-    { name: "Tanmay Mahendra", pass: "3293" },
-    { name: "Raj Ramkrit", pass: "3295" },
-    { name: "Aryan Ganpat", pass: "3303" },
-    { name: "Vighnesh Suryakan", pass: "3306" },
-    { name: "Teju Deepak", pass: "3316" },
-    { name: "Dhiraj Anil", pass: "3317" },
-    { name: "Anagha Hanumat", pass: "3323" },
-    { name: "Indra Arun", pass: "3324" },
-    { name: "Aryan Anil", pass: "3328" },
-    { name: "Sandesh Bapu Sor", pass: "3331" },
-    { name: "Khushali Sainath", pass: "3332" },
-    { name: "Rishabh Santosh", pass: "3333" },
-    { name: "Siddhesh Sopan", pass: "3336" },
-    { name: "Shivam Sachin", pass: "3337" },
-    { name: "Ashish Ganesh", pass: "3343" },
-    { name: "Shravan Wadkar", pass: "3345" },
-    { name: "Yash Sharad", pass: "3348" },
-    { name: "Jayshree Vasant", pass: "3352" },
-    { name: "Purva Panchal", pass: "3356" }
-];
-
-const questionBank = [
-    { q: "Two angles are said to be supplementary when their sum is equal to...", options: ["90°", "120°", "180°", "360°"], answer: "180°" },
-    { q: "If one supplementary angle is 150°, find the other angle.", options: ["30°", "45°", "10°", "25°"], answer: "30°" },
-    { q: "The supplementary angle of 120° is...", options: ["30°", "60°", "90°", "180°"], answer: "60°" },
-    { q: "The formula for the diagonal of a square is...", options: ["√2 * a", "√2 * a²", "2 * a", "a / √2"], answer: "√2 * a" },
-    { q: "Which type of quadrilateral has all sides and all diagonals equal?", options: ["Rectangle", "Square", "Rhombus", "Parallelogram"], answer: "Square" },
-    { q: "Perimeter of a square is found by the formula...", options: ["√2 * side", "4 * side", "2 * side", "side²"], answer: "4 * side" },
-    { q: "The perimeter of a square is 100mm. Find its side.", options: ["15 mm", "20 mm", "25 mm", "30 mm"], answer: "25 mm" },
-    { q: "Find the diagonal of a square whose side is 8 cm.", options: ["14.44 cm", "13.22 cm", "11.31 cm", "11.24 cm"], answer: "11.31 cm" },
-    { q: "Perimeter of a square sheet is 44 cm. Find its area.", options: ["88 cm²", "121 cm²", "256 cm²", "441 cm²"], answer: "121 cm²" },
-    { q: "The formula to find the perimeter of a rectangle is...", options: ["2 * l * b", "l * b", "2 * (l + b)", "2 * (l - b)"], answer: "2 * (l + b)" },
-    { q: "Area of a rectangle is...", options: ["Length x Breadth", "2 * (Length + Breadth)", "Base x Height", "1/2 * Base x Height"], answer: "Length x Breadth" },
-    { q: "Find the perimeter of a square steel plate whose side is 28 cm.", options: ["142 cm", "132 cm", "122 cm", "112 cm"], answer: "112 cm" },
-    { q: "How many sides does a trapezium have?", options: ["6", "5", "4", "3"], answer: "4" },
-    { q: "The sum of internal angles in a triangle is...", options: ["90°", "180°", "270°", "360°"], answer: "180°" },
-    { q: "What is the area of a square whose diagonal is 15 cm?", options: ["112.5 cm²", "111.25 cm²", "110.25 cm²", "109.35 cm²"], answer: "112.5 cm²" },
-    { q: "The area of a rhombus is 84cm². One diagonal is 12cm. Find the other.", options: ["12 cm", "13 cm", "14 cm", "15 cm"], answer: "14 cm" },
-    { q: "In a parallelogram, opposite sides are parallel and equal, but angles are...", options: ["Always 90°", "Not at right angles", "Always 45°", "Sum to 100°"], answer: "Not at right angles" },
-    { q: "Area of a parallelogram is calculated by...", options: ["Base x Height", "2 x Base x Height", "Side²", "Base x Height / 2"], answer: "Base x Height" },
-    { q: "An isosceles triangle has how many equal angles?", options: ["One", "Two", "Three", "None"], answer: "Two" },
-    { q: "If two angles of an isosceles triangle sum to 130°, the third angle is...", options: ["65°", "60°", "50°", "70°"], answer: "50°" }
+    { name: "Saurabh", pass: "3252" },
+    { name: "Soham", pass: "3261" },
+    { name: "Shreya", pass: "3263" },
+    // ... add more students here as needed
 ];
 
 let currentQuestions = [];
 let currentQuestionIndex = 0;
-let userAnswers = new Array(20).fill(null); 
+let userAnswers = []; 
 let timeLeft = 1800; 
 let timerInterval;
 let violationCount = 0;
 
-function shuffle(a) { return a.sort(() => Math.random() - 0.5); }
+// 1. GET QUESTIONS FROM THE MASTER BANK (questions.js)
+function loadSelectedQuestions() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedIds = urlParams.get('ids');
+
+    let allQuestionsList = [];
+    for (let topic in masterQuestionBank) {
+        allQuestionsList = allQuestionsList.concat(masterQuestionBank[topic]);
+    }
+
+    if (selectedIds) {
+        // Teacher generated a specific link
+        const idArray = selectedIds.split(',');
+        currentQuestions = allQuestionsList.filter(q => idArray.includes(q.id));
+    } else {
+        // Standard Link: Shuffle all and pick 20
+        currentQuestions = allQuestionsList.sort(() => 0.5 - Math.random()).slice(0, 20);
+    }
+    
+    // Shuffle options for each question
+    currentQuestions.forEach(q => q.options = q.options.sort(() => 0.5 - Math.random()));
+    userAnswers = new Array(currentQuestions.length).fill(null);
+}
 
 function showInstructions() {
-    const enteredName = document.getElementById('studentName').value.trim();
+    const enteredNameRaw = document.getElementById('studentName').value.trim();
     const enteredPass = document.getElementById('studentPass').value.trim();
     const errorMsg = document.getElementById('login-error');
 
-    if (enteredName === "Siemens" && enteredPass === "1234") {
+    // ADMIN MASTER KEY
+    if (enteredNameRaw.toUpperCase() === "ADMIN" && enteredPass === "0000") {
         localStorage.removeItem("examStatus");
-        alert("Admin: Access has been RESET. The student can now log in again.");
-        location.reload(); 
-        return;
-    }
-
-    if (localStorage.getItem("examStatus") === "done") {
-        errorMsg.innerText = "❌ You have already submitted. Contact your admin to reset.";
-        errorMsg.style.display = 'block';
+        alert("Admin: System Reset.");
+        location.reload();
         return;
     }
 
     const student = students.find(s => {
-        const firstNameInDB = s.name.split(' ')[0].toLowerCase();
-        const firstEnteredName = enteredName.split(' ')[0].toLowerCase();
-        return firstNameInDB === firstEnteredName && s.pass.trim() === enteredPass;
+        const firstName = s.name.split(' ')[0].toLowerCase();
+        return firstName === enteredNameRaw.toLowerCase() && s.pass === enteredPass;
     });
 
     if (student) {
-        errorMsg.style.display = 'none';
+        loadSelectedQuestions();
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('instruction-section').style.display = 'block';
-        currentQuestions = shuffle([...questionBank]);
-        currentQuestions.forEach(q => q.options = shuffle([...q.options]));
     } else {
-        errorMsg.innerText = "❌ Name or TC Number is not correct.";
+        errorMsg.innerText = "❌ Invalid Name or TC Number.";
         errorMsg.style.display = 'block';
     }
 }
 
 function startExam() {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) { elem.requestFullscreen(); }
     document.getElementById('instruction-section').style.display = 'none';
     document.getElementById('question-section').style.display = 'block';
+    
     timerInterval = setInterval(() => {
         timeLeft--;
         let min = Math.floor(timeLeft / 60);
         let sec = timeLeft % 60;
         document.getElementById('timer-display').innerText = `Time: ${min}:${sec < 10 ? '0'+sec : sec}`;
-        if (timeLeft <= 0) { calculateFinalScore(); }
+        if (timeLeft <= 0) calculateFinalScore();
     }, 1000);
+    
     loadQuestion();
 }
 
@@ -150,63 +86,43 @@ function loadQuestion() {
     const q = currentQuestions[currentQuestionIndex];
     document.getElementById('question-text').innerText = q.q;
     document.getElementById('question-number').innerText = currentQuestionIndex + 1;
-    document.getElementById('progress-bar').style.width = ((currentQuestionIndex + 1) / 20 * 100) + "%";
+    document.getElementById('progress-bar').style.width = ((currentQuestionIndex + 1) / currentQuestions.length * 100) + "%";
+    
     const container = document.getElementById('options-container');
     container.innerHTML = ""; 
     q.options.forEach(opt => {
         const checked = userAnswers[currentQuestionIndex] === opt ? "checked" : "";
         container.innerHTML += `<label class="option-label"><input type="radio" name="opt" value="${opt}" ${checked} onchange="userAnswers[${currentQuestionIndex}]='${opt}'"> ${opt}</label>`;
     });
+
     document.getElementById('prev-btn').style.visibility = currentQuestionIndex === 0 ? "hidden" : "visible";
-    document.getElementById('next-btn').innerText = currentQuestionIndex === 19 ? "FINISH" : "NEXT";
+    document.getElementById('next-btn').innerText = currentQuestionIndex === currentQuestions.length - 1 ? "FINISH" : "NEXT";
 }
 
 function nextQuestion() {
-    if (currentQuestionIndex < 19) { currentQuestionIndex++; loadQuestion(); } 
-    else { if(confirm("Submit Exam?")) calculateFinalScore(); }
+    if (currentQuestionIndex < currentQuestions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+    } else {
+        if(confirm("Submit Exam?")) calculateFinalScore();
+    }
 }
 
-function prevQuestion() { if (currentQuestionIndex > 0) { currentQuestionIndex--; loadQuestion(); } }
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion();
+    }
+}
 
 function calculateFinalScore() {
     clearInterval(timerInterval);
-    localStorage.setItem("examStatus", "done");
-    
     let score = 0;
     currentQuestions.forEach((q, i) => { if (userAnswers[i] === q.answer) score++; });
-    const percent = (score / 20) * 100;
     
+    const percent = Math.round((score / currentQuestions.length) * 100);
     document.getElementById('question-section').style.display = 'none';
     document.getElementById('result-section').style.display = 'block';
     document.getElementById('final-score').innerText = score;
     document.getElementById('result-percent').innerText = `Percentage: ${percent}%`;
-    
-    const status = document.getElementById('result-status');
-    if (violationCount >= 2) {
-        status.innerText = "TERMINATED";
-        status.style.color = "red";
-    } else {
-        status.innerText = percent >= 70 ? "PASSED" : "FAILED";
-        status.style.color = percent >= 70 ? "#28a745" : "#d9534f";
-    }
 }
-
-document.addEventListener("visibilitychange", function() {
-    if (document.hidden && document.getElementById('question-section').style.display === 'block') {
-        violationCount++;
-        if (violationCount === 1) {
-            alert("⚠️ WARNING: You left the exam screen. Next time will terminate your exam!");
-        } else if (violationCount >= 2) {
-            alert("❌ EXAM TERMINATED: Too many violations.");
-            calculateFinalScore();
-        }
-    }
-});
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'u' || e.key === 's')) {
-        e.preventDefault();
-        alert("Shortcuts disabled.");
-    }
-});
