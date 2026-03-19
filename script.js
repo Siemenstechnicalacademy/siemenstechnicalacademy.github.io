@@ -101,7 +101,7 @@ function showInstructions() {
     const errorMsg = document.getElementById('login-error');
 
     // ADMIN RESET (MASTER KEY) - Works for 'admin' or 'ADMIN'
-    if (enteredNameRaw.toUpperCase() === "ADMIN" && enteredPass === "0000") {
+    if (enteredNameRaw.toUpperCase() === "Siemens" && enteredPass === "1234") {
         localStorage.removeItem("examStatus");
         alert("Admin: Access has been RESET.");
         location.reload(); 
