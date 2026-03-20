@@ -64,26 +64,149 @@ const students = [
 ];
 
 const questionBank = [
-    { q: "log of 3253 * 2685 ...", 
-    { q: "If one supplementary angle is 150°, find the other angle.", options: ["30°", "45°", "10°", "25°"], answer: "30°" },
-    { q: "The supplementary angle of 120° is...", options: ["30°", "60°", "90°", "180°"], answer: "60°" },
-    { q: "The formula for the diagonal of a square is...", options: ["√2 * a", "√2 * a²", "2 * a", "a / √2"], answer: "√2 * a" },
-    { q: "Which type of quadrilateral has all sides and all diagonals equal?", options: ["Rectangle", "Square", "Rhombus", "Parallelogram"], answer: "Square" },
-    { q: "Perimeter of a square is found by the formula...", options: ["√2 * side", "4 * side", "2 * side", "side²"], answer: "4 * side" },
-    { q: "The perimeter of a square is 100mm. Find its side.", options: ["15 mm", "20 mm", "25 mm", "30 mm"], answer: "25 mm" },
-    { q: "Find the diagonal of a square whose side is 8 cm.", options: ["14.44 cm", "13.22 cm", "11.31 cm", "11.24 cm"], answer: "11.31 cm" },
-    { q: "Perimeter of a square sheet is 44 cm. Find its area.", options: ["88 cm²", "121 cm²", "256 cm²", "441 cm²"], answer: "121 cm²" },
-    { q: "The formula to find the perimeter of a rectangle is...", options: ["2 * l * b", "l * b", "2 * (l + b)", "2 * (l - b)"], answer: "2 * (l + b)" },
-    { q: "Area of a rectangle is...", options: ["Length x Breadth", "2 * (Length + Breadth)", "Base x Height", "1/2 * Base x Height"], answer: "Length x Breadth" },
-    { q: "Find the perimeter of a square steel plate whose side is 28 cm.", options: ["142 cm", "132 cm", "122 cm", "112 cm"], answer: "112 cm" },
-    { q: "How many sides does a trapezium have?", options: ["6", "5", "4", "3"], answer: "4" },
-    { q: "The sum of internal angles in a triangle is...", options: ["90°", "180°", "270°", "360°"], answer: "180°" },
-    { q: "What is the area of a square whose diagonal is 15 cm?", options: ["112.5 cm²", "111.25 cm²", "110.25 cm²", "109.35 cm²"], answer: "112.5 cm²" },
-    { q: "The area of a rhombus is 84cm². One diagonal is 12cm. Find the other.", options: ["12 cm", "13 cm", "14 cm", "15 cm"], answer: "14 cm" },
-    { q: "In a parallelogram, opposite sides are parallel and equal, but angles are...", options: ["Always 90°", "Not at right angles", "Always 45°", "Sum to 100°"], answer: "Not at right angles" },
-    { q: "Area of a parallelogram is calculated by...", options: ["Base x Height", "2 x Base x Height", "Side²", "Base x Height / 2"], answer: "Base x Height" },
-    { q: "An isosceles triangle has how many equal angles?", options: ["One", "Two", "Three", "None"], answer: "Two" },
-    { q: "If two angles of an isosceles triangle sum to 130°, the third angle is...", options: ["65°", "60°", "50°", "70°"], answer: "50°" }
+    [
+  { 
+    "q": "The perimeter of one face of a cube is 20 cm, its volume (in cm³) will be .............", 
+    "options": ["125", "250", "400", "625"], 
+    "answer": "125" 
+  },
+  { 
+    "q": "What is the volume V (in cm³) of the container which can hold 5.28 litre of oil?", 
+    "options": ["V = 5.28 cm³", "V = 52.8 cm³", "V = 528 cm³", "V = 5280 cm³"], 
+    "answer": "V = 5280 cm³" 
+  },
+  { 
+    "q": "What is the total capacity V in litre of a cubical coolant tank of sides 500 mm?", 
+    "options": ["V = 12.5 litre", "V = 25.0 litre", "V = 125.0 litre", "V = 250.0 litre"], 
+    "answer": "V = 125.0 litre" 
+  },
+  { 
+    "q": "Calculate the volume of the cube whose side is 9 cm.", 
+    "options": ["272 cm³", "364 cm³", "729 cm³", "427 cm³"], 
+    "answer": "729 cm³" 
+  },
+  { 
+    "q": "A cube has a volume of 7220 cm³. Find its side.", 
+    "options": ["19.32 cm", "22.5 cm", "25.00 cm", "1.932 cm"], 
+    "answer": "19.32 cm" 
+  },
+  { 
+    "q": "Find the mass of cube whose side is 10 cm and density of the material is 6.9 gm/cc.", 
+    "options": ["6400 gm", "6700 gm", "6800 gm", "6900 gm"], 
+    "answer": "6900 gm" 
+  },
+  { 
+    "q": "Find the mass of cube whose side is 5 cm and density of the material is 6.9 gm/cc.", 
+    "options": ["862.5 gm", "852.5 gm", "762.5 gm", "652.5 gm"], 
+    "answer": "862.5 gm" 
+  },
+  { 
+    "q": "What will be the density (ρ) of iron cube, if mass (m) of metal = 5 kg, volume (V) = 685 cm³", 
+    "options": ["6.29 gram /cm³", "7.29 gram /cm³", "8.29 gram /cm³", "9.29 gram /cm³"], 
+    "answer": "7.29 gram /cm³" 
+  },
+  { 
+    "q": "If an iron cube weighing 4.99 kg has a volume of 640 cc. What will be the density?", 
+    "options": ["7.2 gram /cm³", "7.5 gram /cm³", "7.8 gram /cm³", "8.0 gram /cm³"], 
+    "answer": "7.8 gram /cm³" 
+  },
+  { 
+    "q": "What is the volume of a room of length 15 feet breadth, 10 feet and height 12 feet?", 
+    "options": ["1000 cu.feet", "1200 cu.feet", "1600 cu.feet", "1800 cu.feet"], 
+    "answer": "1800 cu.feet" 
+  },
+  { 
+    "q": "The volume of a cuboid of sides 10m, 10cm, 10 cm is ............ ", 
+    "options": ["100 cm³", "1000 cm³", "10000 cm³", "100000 cm³"], 
+    "answer": "100000 cm³" 
+  },
+  { 
+    "q": "Find the weight of rectangular block of a cast iron casting of 100 x 9 x 12 cm, when the density is 7.8gm/cc.", 
+    "options": ["84.24 kg", "84.35 kg", "84.56 kg", "84.60 kg"], 
+    "answer": "84.24 kg" 
+  },
+  { 
+    "q": "A casting of a rectangular block having 25 cm x 20 cm x 8 cm size. The density of C.I in 7.5 gm/cc. Calculate the weight.", 
+    "options": ["20 kg", "22 kg", "25 kg", "30 kg"], 
+    "answer": "30 kg" 
+  },
+  { 
+    "q": "Find the weight of Rectangular block of a cast iron casting of 200cm x 18cm x 6cm. When the density is 7.8 gm/cc.", 
+    "options": ["1684.8 kg", "168.48 kg", "164.84 kg", "16.848 kg"], 
+    "answer": "168.48 kg" 
+  },
+  { 
+    "q": "Calculate the mass (m) of a piece of metal in kg if Length (l) = 1000 mm ; Breadth (b) = 60 mm Height (h) = 10 mm ; Density (P) = 7.85 g/cm³", 
+    "options": ["1.71 kg", "2.71 kg", "3.71 kg", "4.71 kg"], 
+    "answer": "4.71 kg" 
+  }
+[
+  {
+    "q": "Calculate the mass of steel plate length 1800 mm, width 65 mm, thickness 12 mm and density is 7.85 kg/dm³.",
+    "options": ["14.02 kg", "12.02 kg", "11.03 kg", "10.03 kg"],
+    "answer": "11.03 kg"
+  },
+  {
+    "q": "Calculate the mass in kg of a rectangular steel plate of dimension 220m x 330m x 15m (density of plate is 7.85kg/dm³)",
+    "options": ["855 kg", "723 kg", "7.25 kg", "8.55 kg"],
+    "answer": "8.55 kg"
+  },
+  {
+    "q": "To calculate the total surface area of cylinder which formula is used?",
+    "options": ["(πr²/4) + L.S.A", "(πr²/2) + L.S.A", "(πd²/4) + L.S.A", "(πd²/2) + L.S.A"],
+    "answer": "(πd²/2) + L.S.A"
+  },
+  {
+    "q": "Volume of cylinder is equal to ...................",
+    "options": ["πr²h", "(1/3)πr²h", "(2/3)πr²h", "(3/4)πr²h"],
+    "answer": "πr²h"
+  },
+  {
+    "q": "Which one of the following formulae is the correct one to be used to calculate the height (h) of the liquid column in a cylindrical vessel of inside diameter (d) and the volume of liquid (V)?",
+    "options": ["h = (π x V) / (d² x π)", "h = (4 x V) / (d x π)", "h = (4 x V) / d²", "h = (4 x V) / (d² x π)"],
+    "answer": "h = (4 x V) / (d² x π)"
+  },
+  {
+    "q": "What is the formula for volume of a cylinder with its base diameter 'd' and height 'H'?",
+    "options": ["d x H", "d² x H", "(πd²/4) x H", "(πd²/4) x H²d"],
+    "answer": "(πd²/4) x H"
+  },
+  {
+    "q": "Calculate the volume of a cylinder whose base area is 120 cm² and height of the cylinder is 16 cm.",
+    "options": ["1600 cm³", "1920 cm³", "2240 cm³", "2420 cm³"],
+    "answer": "1920 cm³"
+  },
+  {
+    "q": "Find the total surface area of a cylinder of 14 cm diameter and 20 cm height. (Take π = 22/7)",
+    "options": ["1582 cm²", "1354 cm²", "1188 cm²", "1072 cm²"],
+    "answer": "1188 cm²"
+  },
+  {
+    "q": "Volume of cylinder whose height is 21cm & base radius is 14 cm is .........",
+    "options": ["19404 cc", "4116 cc", "12936 cc", "181104 cc"],
+    "answer": "12936 cc"
+  },
+  {
+    "q": "The ratio of the respective heights and the respective radii of two cylinders are 1 : 2 and 2 : 1 respectively. Then their respective volumes are in the ratio ...................",
+    "options": ["4 : 1", "2 : 1", "1 : 4", "1 : 2"],
+    "answer": "2 : 1"
+  },
+  {
+    "q": "Find the volume of the cylinder whose diameter is 20 cm and height is 40 cm.",
+    "options": ["12571.14 cm³", "1257.14 cm³", "129.72 cm³", "12.972 cm³"],
+    "answer": "12571.14 cm³"
+  },
+  {
+    "q": "Base area and volume of a solid cylinder are 13.86cm² and 69.3 cm³ respectively. Find its height.",
+    "options": ["5 cm", "0.5 cm", "0.1 cm", "0.05 cm"],
+    "answer": "5 cm"
+  },
+  {
+    "q": "How many litre of water a cylinder of radius 75 cm and height 100 cm can hold?",
+    "options": ["1767.38 litre", "1776.38 litre", "1767.857 litre", "1677.38 litre"],
+    "answer": "1767.857 litre"
+  }
+
 ];
 
 let currentQuestions = [];
