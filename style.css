@@ -36,7 +36,21 @@
     50% { transform: translateX(8px); }
     75% { transform: translateX(-8px); }
 }
+/* Disable text selection across the whole page */
+body {
+    -webkit-user-select: none;  /* Safari/Chrome/iOS */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE/Edge */
+    user-select: none;          /* Standard */
+    
+    /* Disable the blue highlight overlay on mobile long-press */
+    -webkit-tap-highlight-color: transparent;
+}
 
+/* Specifically target the question text to ensure no selection */
+.question-text {
+    pointer-events: none; /* Makes the text "invisible" to touch events */
+}
 @media (max-width: 600px) {
     .login-card { padding: 25px; }
     #question-section { min-height: 550px; }
