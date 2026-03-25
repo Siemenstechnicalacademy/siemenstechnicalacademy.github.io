@@ -1,6 +1,9 @@
 // --- STUDENT DATABASE ---
 const students = [
     { name: "Deva", pass: "1371" },
+    { name: "Nikhil",pass: "3272" },
+    { name : "Dimple",pass: "3321"},
+    { name : "Tanuja",pass: "3346"},
     { name: "Hitesh", pass: "2685" },
     { name: "Saurabh Shivaji Bhoir", pass: "3252" },
     { name: "Soham Mahendra Chaudhari", pass: "3261" },
