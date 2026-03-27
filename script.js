@@ -2,7 +2,7 @@
 const students = [
     { name: "Deva", pass: "1371" },
     { name: "Nikhil",pass: "3272" },
-    { name : "Dimple",pass: "3321"},
+    { name : "Dimpal",pass: "3321"},
     { name : "Tanuja",pass: "3346"},
     { name : "Samruddhi",pass: "3270"},
     { name : "Kartiki",pass: "3351"},
