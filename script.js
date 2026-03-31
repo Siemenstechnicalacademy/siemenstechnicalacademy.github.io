@@ -126,35 +126,48 @@ function showInstructions() {
 
     if (student) {
         const safeName = getSafeName(student.name);
-        database.ref('student_sessions/' + safeName).once('value').then((snapshot) => {
-            const data = snapshot.val();
-            if (data && data.locked) {
-                errorMsg.innerText = "❌ Account Locked: You have already logged in. Ask Admin to reset.";
+        // ── Step 1: Check exam activation for this student's division ──
+        const divKey = '61st_' + student.division;
+        database.ref('exam_activation/' + divKey).once('value').then(activationSnap => {
+            const activationData = activationSnap.val();
+            const isActive = activationData && activationData.active === true;
+
+            if (!isActive) {
+                errorMsg.innerText = `⏳ Exam not activated yet for 61st ${student.division}. Please wait for your instructor.`;
                 errorMsg.style.display = 'block';
-                
-                // Monitor this user's name for an unlock event even while on the login page
-                localStorage.setItem("currentStudent", student.name);
-                checkAndStartUserListener();
-            } else {
-                database.ref('student_sessions/' + safeName).set({
-                    locked: true,
-                    timestamp: Date.now()
-                });
-
-                localStorage.setItem("currentStudent", student.name);
-                localStorage.setItem("currentTC", tc);
-                localStorage.setItem("currentBatch", "61st");
-
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('instruction-section').style.display = 'block';
-
-                let loginCountKey = student.name + "_loginCount";
-                let loginCount = parseInt(localStorage.getItem(loginCountKey) || "0");
-                currentQuestions = generateQuestionsByLogin(questionBank, loginCount, student.name);
-                userAnswers = new Array(currentQuestions.length).fill(null);
-
-                localStorage.setItem(loginCountKey, loginCount + 1);
+                return;
             }
+
+            // ── Step 2: Check session lock ──
+            return database.ref('student_sessions/' + safeName).once('value').then(snapshot => {
+                const data = snapshot.val();
+                if (data && data.locked) {
+                    errorMsg.innerText = "❌ Account Locked: You have already logged in. Ask Admin to reset.";
+                    errorMsg.style.display = 'block';
+                    localStorage.setItem("currentStudent", student.name);
+                    checkAndStartUserListener();
+                } else {
+                    database.ref('student_sessions/' + safeName).set({
+                        locked: true,
+                        timestamp: Date.now()
+                    });
+
+                    localStorage.setItem("currentStudent", student.name);
+                    localStorage.setItem("currentTC", tc);
+                    localStorage.setItem("currentBatch", "61st");
+                    localStorage.setItem("currentDivision", student.division);
+
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('instruction-section').style.display = 'block';
+
+                    let loginCountKey = student.name + "_loginCount";
+                    let loginCount = parseInt(localStorage.getItem(loginCountKey) || "0");
+                    currentQuestions = generateQuestionsByLogin(questionBank, loginCount, student.name);
+                    userAnswers = new Array(currentQuestions.length).fill(null);
+
+                    localStorage.setItem(loginCountKey, loginCount + 1);
+                }
+            });
         }).catch(err => {
             console.error(err);
             alert("Could not connect to database. Check your internet.");
@@ -252,13 +265,15 @@ function calculateFinalScore() {
     const studentName = localStorage.getItem("currentStudent") || "Unknown";
     const tcNo = localStorage.getItem("currentTC") || "N/A";
     const studentBatch = localStorage.getItem("currentBatch") || "N/A";
+    const studentDivision = localStorage.getItem("currentDivision") || "N/A";
     const finalPercent = Math.round((score / currentQuestions.length) * 100);
 
-    // SEND TO FIREBASE (Batch-wise storage)
-    database.ref('exam_results/61st').push({
+    // SEND TO FIREBASE (includes division)
+    database.ref('exam_results').push({
         name: studentName,
         tcNumber: tcNo,
         batch: studentBatch,
+        division: studentDivision,
         score: score,
         totalQuestions: currentQuestions.length,
         percentage: finalPercent,
